@@ -22,15 +22,15 @@ package org.moire.opensudoku.gui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -44,7 +44,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.google.android.gms.ads.AdView;
 
@@ -60,7 +59,7 @@ import org.moire.opensudoku.utils.AndroidUtils;
  *
  * @author romario
  */
-public class FolderListActivity extends ListActivity {
+public class FolderListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 	public static final int MENU_ITEM_ADD = Menu.FIRST;
 	public static final int MENU_ITEM_RENAME = Menu.FIRST + 1;
@@ -87,16 +86,24 @@ public class FolderListActivity extends ListActivity {
 	private long mRenameFolderID;
 	private long mDeleteFolderID;
 
-	@Override
+    private ListView listView;
+    private SimpleCursorAdapter adapter;
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.folder_list);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
 		View getMorePuzzles = (View) findViewById(R.id.get_more_puzzles);
+        listView = (ListView) findViewById(android.R.id.list);
 
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 		// Inform the list we provide context menus for items
-		getListView().setOnCreateContextMenuListener(this);
+		listView.setOnCreateContextMenuListener(this);
+
+        listView.setOnItemClickListener(this);
 
 		getMorePuzzles.setOnClickListener(new OnClickListener() {
 			@Override
@@ -112,13 +119,13 @@ public class FolderListActivity extends ListActivity {
 		mDatabase = new SudokuDatabase(getApplicationContext());
 		mCursor = mDatabase.getFolderList();
 		startManagingCursor(mCursor);
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.folder_list_item,
+        adapter = new SimpleCursorAdapter(this, R.layout.folder_list_item,
 				mCursor, new String[]{FolderColumns.NAME, FolderColumns._ID},
 				new int[]{R.id.name, R.id.detail});
 		mFolderListBinder = new FolderListViewBinder(this);
 		adapter.setViewBinder(mFolderListBinder);
 
-		setListAdapter(adapter);
+        listView.setAdapter(adapter);
 
 		// show changelog on first run
 		Changelog changelog = new Changelog(this);
@@ -198,7 +205,7 @@ public class FolderListActivity extends ListActivity {
 			return;
 		}
 
-		Cursor cursor = (Cursor) getListAdapter().getItem(info.position);
+		Cursor cursor = (Cursor) adapter.getItem(info.position);
 		if (cursor == null) {
 			// For some reason the requested item isn't available, do nothing
 			return;
@@ -357,8 +364,8 @@ public class FolderListActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+    @Override
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		Intent i = new Intent(this, SudokuListActivity.class);
 		i.putExtra(SudokuListActivity.EXTRA_FOLDER_ID, id);
 		startActivity(i);
@@ -368,7 +375,7 @@ public class FolderListActivity extends ListActivity {
 		mCursor.requery();
 	}
 
-	private static class FolderListViewBinder implements ViewBinder {
+    private static class FolderListViewBinder implements ViewBinder {
 		private Context mContext;
 		private FolderDetailLoader mDetailLoader;
 
