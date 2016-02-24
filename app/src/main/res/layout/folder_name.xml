@@ -17,9 +17,8 @@
         android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:autoText="false"
+        android:inputType="textCapSentences|text"
         android:singleLine="true"
-        android:capitalize="sentences"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

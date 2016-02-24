@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="banner_ad_unit_id" translatable="false">ca-app-pub-9237162179109234/4578449905</string>
+
 	<string name="app_name">Open Sudoku</string>
 	<string name="edit_sudoku">Edit sudoku</string>
 

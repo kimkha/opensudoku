@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -43,6 +44,10 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
+import com.google.android.gms.ads.AdView;
+
 import org.moire.opensudoku.R;
 import org.moire.opensudoku.db.FolderColumns;
 import org.moire.opensudoku.db.SudokuDatabase;
@@ -101,6 +106,8 @@ public class FolderListActivity extends ListActivity {
 				startActivity(intent);
 			}
 		});
+
+		AndroidUtils.showAds((AdView) findViewById(R.id.ad_view));
 
 		mDatabase = new SudokuDatabase(getApplicationContext());
 		mCursor = mDatabase.getFolderList();

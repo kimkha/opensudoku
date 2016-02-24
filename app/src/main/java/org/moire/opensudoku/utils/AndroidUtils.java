@@ -2,6 +2,7 @@ package org.moire.opensudoku.utils;
 
 import java.util.List;
 
+import org.moire.opensudoku.BuildConfig;
 import org.moire.opensudoku.R;
 
 import android.content.Context;
@@ -11,8 +12,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class AndroidUtils {
+	private static AdRequest adRequest;
+
 	/**
 	 * Indicates whether the specified action can be used as an intent. This
 	 * method queries the package manager for installed packages that can
@@ -79,5 +86,22 @@ public class AndroidUtils {
 		} catch (NameNotFoundException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@NonNull
+	private static AdRequest newAdRequest() {
+		AdRequest.Builder builder = new AdRequest.Builder();
+		if (BuildConfig.DEBUG) {
+			builder.addTestDevice("14636C6C8763E3CF9546AFE871A60ABF")
+					.addTestDevice("3B00023B2A7F00EECDECCF293D910ED5");
+		}
+		return builder.build();
+	}
+
+	public static void showAds(@NonNull AdView adView) {
+		if (adRequest == null) {
+			adRequest = newAdRequest();
+		}
+		adView.loadAd(adRequest);
 	}
 }
