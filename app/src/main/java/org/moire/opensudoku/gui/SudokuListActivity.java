@@ -35,6 +35,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -48,6 +50,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+
+import com.google.android.gms.ads.AdView;
+
 import org.moire.opensudoku.R;
 import org.moire.opensudoku.db.SudokuColumns;
 import org.moire.opensudoku.db.SudokuDatabase;
@@ -62,7 +67,7 @@ import org.moire.opensudoku.utils.AndroidUtils;
  *
  * @author romario
  */
-public class SudokuListActivity extends ListActivity {
+public class SudokuListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 	public static final String EXTRA_FOLDER_ID = "folder_id";
 
@@ -102,6 +107,8 @@ public class SudokuListActivity extends ListActivity {
 	private SudokuDatabase mDatabase;
 	private FolderDetailLoader mFolderDetailLoader;
 
+	private ListView listview;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,10 +117,15 @@ public class SudokuListActivity extends ListActivity {
 		AndroidUtils.setThemeFromPreferences(this);
 
 		setContentView(R.layout.sudoku_list);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 		mFilterStatus = (TextView) findViewById(R.id.filter_status);
+		listview = (ListView) findViewById(android.R.id.list);
 
-		getListView().setOnCreateContextMenuListener(this);
+		listview.setOnCreateContextMenuListener(this);
+		listview.setOnItemClickListener(this);
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
+
+		AndroidUtils.showAds((AdView) findViewById(R.id.ad_view));
 
 		mDatabase = new SudokuDatabase(getApplicationContext());
 		mFolderDetailLoader = new FolderDetailLoader(getApplicationContext());
@@ -141,7 +153,7 @@ public class SudokuListActivity extends ListActivity {
 						R.id.last_played, R.id.created, R.id.note});
 		mAdapter.setViewBinder(new SudokuListViewBinder(this));
 		updateList();
-		setListAdapter(mAdapter);
+		listview.setAdapter(mAdapter);
 	}
 
 	@Override
@@ -346,7 +358,7 @@ public class SudokuListActivity extends ListActivity {
 			return;
 		}
 
-		Cursor cursor = (Cursor) getListAdapter().getItem(info.position);
+		Cursor cursor = (Cursor) mAdapter.getItem(info.position);
 		if (cursor == null) {
 			// For some reason the requested item isn't available, do nothing
 			return;
@@ -423,7 +435,7 @@ public class SudokuListActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		playSudoku(id);
 	}
 

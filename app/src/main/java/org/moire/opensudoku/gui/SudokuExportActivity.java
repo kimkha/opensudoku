@@ -10,6 +10,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +27,7 @@ import org.moire.opensudoku.gui.exporting.FileExportTaskParams;
 import org.moire.opensudoku.gui.exporting.FileExportTaskResult;
 import org.moire.opensudoku.gui.exporting.FileExportTask.OnExportFinishedListener;
 
-public class SudokuExportActivity extends Activity {
+public class SudokuExportActivity extends AppCompatActivity {
 
 	/**
 	 * Id of folder to export. If -1, all folders will be exported.
@@ -55,6 +57,7 @@ public class SudokuExportActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.sudoku_export);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
 		mFileNameEdit = (EditText) findViewById(R.id.filename);
 		mDirectoryEdit = (EditText) findViewById(R.id.directory);

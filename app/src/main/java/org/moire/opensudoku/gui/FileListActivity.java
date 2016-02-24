@@ -38,20 +38,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdView;
+
 import org.moire.opensudoku.R;
+import org.moire.opensudoku.utils.AndroidUtils;
 
 /**
  * List folders.
  *
  * @author dracula
  */
-public class FileListActivity extends ListActivity {
+public class FileListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 	private static final int DIALOG_IMPORT_FILE = 0;
 
 	public static final String EXTRA_FOLDER_NAME = "FOLDER_NAME";
@@ -66,15 +73,24 @@ public class FileListActivity extends ListActivity {
 	private List<Map<String, Object>> mList;
 	private Context mContext = this;
 
-	@Override
+    private ListView listView;
+    private SimpleAdapter adapter;
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.file_list);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        listView = (ListView) findViewById(android.R.id.list);
 
 		setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 		// Inform the list we provide context menus for items
-		getListView().setOnCreateContextMenuListener(this);
+		listView.setOnCreateContextMenuListener(this);
+        listView.setOnItemClickListener(this);
+
+        AndroidUtils.showAds((AdView) findViewById(R.id.ad_view));
 
 		Intent intent = getIntent();
 		String mDirectory = intent.getStringExtra(EXTRA_FOLDER_NAME);
@@ -123,9 +139,9 @@ public class FileListActivity extends ListActivity {
 		String[] from = {ITEM_KEY_NAME, ITEM_KEY_DETAIL};
 		int[] to = {R.id.name, R.id.detail};
 
-		SimpleAdapter adapter = new SimpleAdapter(this, (List<? extends Map<String, ?>>) mList, R.layout.folder_list_item, from, to);
+        adapter = new SimpleAdapter(this, (List<? extends Map<String, ?>>) mList, R.layout.folder_list_item, from, to);
 		adapter.setViewBinder(new FileListViewBinder());
-		setListAdapter(adapter);
+		listView.setAdapter(adapter);
 	}
 
 	@Override
@@ -190,7 +206,7 @@ public class FileListActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		File f = (File) (mList.get((int) id).get(ITEM_KEY_FILE));
 		if (f.isFile()) {
 			mSelectedFile = f;

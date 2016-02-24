@@ -25,6 +25,8 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -45,7 +47,7 @@ import org.moire.opensudoku.utils.AndroidUtils;
  *
  * @author romario
  */
-public class SudokuEditActivity extends Activity {
+public class SudokuEditActivity extends AppCompatActivity {
 
 	/**
 	 * When inserting new data, I need to know folder in which will new sudoku be stored.
@@ -80,21 +82,22 @@ public class SudokuEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// go fullscreen for devices with QVGA screen (only way I found
+		// TODO go fullscreen for devices with QVGA screen (only way I found
 		// how to fit UI on the screen)
-		Display display = getWindowManager().getDefaultDisplay();
-		if ((display.getWidth() == 240 || display.getWidth() == 320)
-				&& (display.getHeight() == 240 || display.getHeight() == 320)) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			mFullScreen = true;
-		}
+//		Display display = getWindowManager().getDefaultDisplay();
+//		if ((display.getWidth() == 240 || display.getWidth() == 320)
+//				&& (display.getHeight() == 240 || display.getHeight() == 320)) {
+//			requestWindowFeature(Window.FEATURE_NO_TITLE);
+//			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//			mFullScreen = true;
+//		}
 
 		// theme must be set before setContentView
 		AndroidUtils.setThemeFromPreferences(this);
 
 		setContentView(R.layout.sudoku_edit);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 		mRootLayout = (ViewGroup) findViewById(R.id.root_layout);
 		mBoard = (SudokuBoardView) findViewById(R.id.sudoku_board);
 

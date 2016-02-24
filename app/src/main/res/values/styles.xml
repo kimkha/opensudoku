@@ -8,7 +8,7 @@
 		<item name="windowActionBar">false</item>
 	</style>
 
-	<style name="Theme.Default">
+	<style name="Theme.Default" parent="MyTheme">
 		<item name="lineColor">#757575</item>
 		<item name="sectorLineColor">#9e9e9e</item>
 		<item name="textColor">@android:color/white</item>
@@ -20,7 +20,7 @@
 		<item name="backgroundColorSelected">#b2dfdb</item>
 	</style>
 
-	<style name="Theme.PaperI">
+	<style name="Theme.PaperI" parent="MyTheme">
 		<item name="lineColor">#757575</item>
 		<item name="sectorLineColor">#9e9e9e</item>
 		<item name="textColor">@android:color/white</item>
@@ -31,7 +31,7 @@
 		<item name="backgroundColorSelected">#b2dfdb</item>
 	</style>
 
-	<style name="Theme.PaperII">
+	<style name="Theme.PaperII" parent="MyTheme">
 		<item name="lineColor">#757575</item>
 		<item name="sectorLineColor">#9e9e9e</item>
 		<item name="textColor">@android:color/white</item>
@@ -43,7 +43,7 @@
 		<item name="backgroundColorSelected">#b2dfdb</item>
 	</style>
 
-	<style name="Theme.Light">
+	<style name="Theme.Light" parent="MyTheme">
 		<item name="lineColor">#666666</item>
 		<item name="sectorLineColor">@android:color/black</item>
 		<item name="textColor">@android:color/black</item>
@@ -55,7 +55,7 @@
 		<item name="backgroundColorSelected">#b2dfdb</item>
 	</style>
 
-	<style name="Theme.PaperLightI">
+	<style name="Theme.PaperLightI" parent="MyTheme">
 		<item name="lineColor">#666666</item>
 		<item name="sectorLineColor">@android:color/black</item>
 		<item name="textColor">#555555</item>
@@ -66,7 +66,7 @@
 		<item name="backgroundColorSelected">#b2dfdb</item>
 	</style>
 
-	<style name="Theme.PaperLightII">
+	<style name="Theme.PaperLightII" parent="MyTheme">
 		<item name="lineColor">#666666</item>
 		<item name="sectorLineColor">@android:color/black</item>
 		<item name="textColor">#555555</item>

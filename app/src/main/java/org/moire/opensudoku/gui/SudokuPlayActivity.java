@@ -30,6 +30,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdView;
+
 import org.moire.opensudoku.R;
 import org.moire.opensudoku.db.SudokuDatabase;
 import org.moire.opensudoku.game.SudokuGame;
@@ -51,7 +56,7 @@ import org.moire.opensudoku.utils.AndroidUtils;
 
 /*
  */
-public class SudokuPlayActivity extends Activity {
+public class SudokuPlayActivity extends AppCompatActivity {
 
 	public static final String EXTRA_SUDOKU_ID = "sudoku_id";
 
@@ -102,25 +107,28 @@ public class SudokuPlayActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// go fullscreen for devices with QVGA screen (only way I found
+		// TODO go fullscreen for devices with QVGA screen (only way I found
 		// how to fit UI on the screen)
-		Display display = getWindowManager().getDefaultDisplay();
-		if ((display.getWidth() == 240 || display.getWidth() == 320)
-				&& (display.getHeight() == 240 || display.getHeight() == 320)) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			mFullScreen = true;
-		}
+//		Display display = getWindowManager().getDefaultDisplay();
+//		if ((display.getWidth() == 240 || display.getWidth() == 320)
+//				&& (display.getHeight() == 240 || display.getHeight() == 320)) {
+//			requestWindowFeature(Window.FEATURE_NO_TITLE);
+//			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//			mFullScreen = true;
+//		}
 
 		// theme must be set before setContentView
 		AndroidUtils.setThemeFromPreferences(this);
 
 		setContentView(R.layout.sudoku_play);
+		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
 		mRootLayout = (ViewGroup) findViewById(R.id.root_layout);
 		mSudokuBoard = (SudokuBoardView) findViewById(R.id.sudoku_board);
 		mTimeLabel = (TextView) findViewById(R.id.time_label);
+
+        AndroidUtils.showAds((AdView) findViewById(R.id.ad_view));
 
 		mDatabase = new SudokuDatabase(getApplicationContext());
 		mHintsQueue = new HintsQueue(this);

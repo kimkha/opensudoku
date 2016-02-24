@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <ListView
         android:id="@id/android:list"
@@ -11,5 +16,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawSelectorOnTop="false" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="@string/banner_ad_unit_id" />
 
 </LinearLayout>

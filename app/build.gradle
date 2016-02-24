@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode getCustomVersion()
         versionName "1.0"
+        resValue "string", "app_name", "AwSudoku"
     }
     buildTypes {
         release {
