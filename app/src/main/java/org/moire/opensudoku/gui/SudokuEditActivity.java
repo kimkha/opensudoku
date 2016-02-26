@@ -55,9 +55,6 @@ public class SudokuEditActivity extends AppCompatActivity {
 	public static final String EXTRA_FOLDER_ID = "folder_id";
 	public static final String EXTRA_SUDOKU_ID = "sudoku_id";
 
-	public static final int MENU_ITEM_SAVE = Menu.FIRST;
-	public static final int MENU_ITEM_CANCEL = Menu.FIRST + 1;
-
 	// The different distinct states the activity can be run in.
 	private static final int STATE_EDIT = 0;
 	private static final int STATE_INSERT = 1;
@@ -202,14 +199,7 @@ public class SudokuEditActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// This is our one standard application action -- inserting a
-		// new note into the list.
-		menu.add(0, MENU_ITEM_SAVE, 0, R.string.save)
-				.setShortcut('1', 's')
-				.setIcon(R.drawable.ic_save);
-		menu.add(0, MENU_ITEM_CANCEL, 1, android.R.string.cancel)
-				.setShortcut('3', 'c')
-				.setIcon(R.drawable.ic_close);
+        getMenuInflater().inflate(R.menu.edit_sudoku, menu);
 
 		// Generate any additional actions that can be performed on the
 		// overall list.  In a normal install, there are no additional
@@ -226,11 +216,11 @@ public class SudokuEditActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case MENU_ITEM_SAVE:
+			case R.id.action_save:
 				// do nothing, puzzle will be saved automatically in onPause
 				finish();
 				return true;
-			case MENU_ITEM_CANCEL:
+			case R.id.action_cancel:
 				mState = STATE_CANCEL;
 				finish();
 				return true;

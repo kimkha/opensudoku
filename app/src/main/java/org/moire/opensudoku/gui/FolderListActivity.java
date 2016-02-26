@@ -61,14 +61,6 @@ import org.moire.opensudoku.utils.AndroidUtils;
  */
 public class FolderListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-	public static final int MENU_ITEM_ADD = Menu.FIRST;
-	public static final int MENU_ITEM_RENAME = Menu.FIRST + 1;
-	public static final int MENU_ITEM_DELETE = Menu.FIRST + 2;
-	public static final int MENU_ITEM_ABOUT = Menu.FIRST + 3;
-	public static final int MENU_ITEM_EXPORT = Menu.FIRST + 4;
-	public static final int MENU_ITEM_EXPORT_ALL = Menu.FIRST + 5;
-	public static final int MENU_ITEM_IMPORT = Menu.FIRST + 6;
-
 	private static final int DIALOG_ABOUT = 0;
 	private static final int DIALOG_ADD_FOLDER = 1;
 	private static final int DIALOG_RENAME_FOLDER = 2;
@@ -164,23 +156,9 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.list_folder, menu);
+
 		super.onCreateOptionsMenu(menu);
-
-		// This is our one standard application action -- inserting a
-		// new note into the list.
-		menu.add(0, MENU_ITEM_ADD, 0, R.string.add_folder)
-				.setShortcut('3', 'a')
-				.setIcon(R.drawable.ic_add);
-		menu.add(0, MENU_ITEM_IMPORT, 0, R.string.import_file)
-				.setShortcut('8', 'i')
-				.setIcon(R.drawable.ic_cloud_upload);
-		menu.add(0, MENU_ITEM_EXPORT_ALL, 1, R.string.export_all_folders)
-				.setShortcut('7', 'e')
-				.setIcon(R.drawable.ic_share);
-		menu.add(0, MENU_ITEM_ABOUT, 2, R.string.about)
-				.setShortcut('1', 'h')
-				.setIcon(R.drawable.ic_info);
-
 
 		// Generate any additional actions that can be performed on the
 		// overall list.  In a normal install, there are no additional
@@ -194,6 +172,32 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 		return true;
 
 	}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_add_folder:
+                showDialog(DIALOG_ADD_FOLDER);
+                return true;
+            case R.id.action_import:
+                intent = new Intent();
+                intent.setClass(this, FileListActivity.class);
+                intent.putExtra(FileListActivity.EXTRA_FOLDER_NAME, "/sdcard");
+                startActivity(intent);
+                return true;
+            case R.id.action_export_all:
+                intent = new Intent();
+                intent.setClass(this, SudokuExportActivity.class);
+                intent.putExtra(SudokuExportActivity.EXTRA_FOLDER_ID, SudokuExportActivity.ALL_FOLDERS);
+                startActivity(intent);
+                return true;
+            case R.id.action_info:
+                showDialog(DIALOG_ABOUT);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
@@ -210,12 +214,41 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 			// For some reason the requested item isn't available, do nothing
 			return;
 		}
-		menu.setHeaderTitle(cursor.getString(cursor.getColumnIndex(FolderColumns.NAME)));
 
-		menu.add(0, MENU_ITEM_EXPORT, 0, R.string.export_folder);
-		menu.add(0, MENU_ITEM_RENAME, 1, R.string.rename_folder);
-		menu.add(0, MENU_ITEM_DELETE, 2, R.string.delete_folder);
+        getMenuInflater().inflate(R.menu.folder_context, menu);
+
+		menu.setHeaderTitle(cursor.getString(cursor.getColumnIndex(FolderColumns.NAME)));
 	}
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info;
+        try {
+            info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "bad menuInfo", e);
+            return false;
+        }
+
+
+        switch (item.getItemId()) {
+            case R.id.action_export:
+                Intent intent = new Intent();
+                intent.setClass(this, SudokuExportActivity.class);
+                intent.putExtra(SudokuExportActivity.EXTRA_FOLDER_ID, info.id);
+                startActivity(intent);
+                return true;
+            case R.id.action_rename:
+                mRenameFolderID = info.id;
+                showDialog(DIALOG_RENAME_FOLDER);
+                return true;
+            case R.id.action_delete:
+                mDeleteFolderID = info.id;
+                showDialog(DIALOG_DELETE_FOLDER);
+                return true;
+        }
+        return false;
+    }
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -306,62 +339,6 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 				break;
 			}
 		}
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterView.AdapterContextMenuInfo info;
-		try {
-			info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-		} catch (ClassCastException e) {
-			Log.e(TAG, "bad menuInfo", e);
-			return false;
-		}
-
-
-		switch (item.getItemId()) {
-			case MENU_ITEM_EXPORT:
-				Intent intent = new Intent();
-				intent.setClass(this, SudokuExportActivity.class);
-				intent.putExtra(SudokuExportActivity.EXTRA_FOLDER_ID, info.id);
-				startActivity(intent);
-				return true;
-			case MENU_ITEM_RENAME:
-				mRenameFolderID = info.id;
-				showDialog(DIALOG_RENAME_FOLDER);
-				return true;
-			case MENU_ITEM_DELETE:
-				mDeleteFolderID = info.id;
-				showDialog(DIALOG_DELETE_FOLDER);
-				return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
-		switch (item.getItemId()) {
-			case MENU_ITEM_ADD:
-				showDialog(DIALOG_ADD_FOLDER);
-				return true;
-			case MENU_ITEM_IMPORT:
-				intent = new Intent();
-				intent.setClass(this, FileListActivity.class);
-				intent.putExtra(FileListActivity.EXTRA_FOLDER_NAME, "/sdcard");
-				startActivity(intent);
-				return true;
-			case MENU_ITEM_EXPORT_ALL:
-				intent = new Intent();
-				intent.setClass(this, SudokuExportActivity.class);
-				intent.putExtra(SudokuExportActivity.EXTRA_FOLDER_ID, SudokuExportActivity.ALL_FOLDERS);
-				startActivity(intent);
-				return true;
-			case MENU_ITEM_ABOUT:
-				showDialog(DIALOG_ABOUT);
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
     @Override

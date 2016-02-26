@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_folder"
+        android:icon="@drawable/ic_add"
+        android:title="@string/add_folder"
+        app:showAsAction="never"
+        android:orderInCategory="0"
+        android:numericShortcut="3"
+        android:alphabeticShortcut="a"/>
+    <item
+        android:id="@+id/action_import"
+        android:icon="@drawable/ic_cloud_upload"
+        android:title="@string/import_file"
+        app:showAsAction="never"
+        android:orderInCategory="1"
+        android:numericShortcut="8"
+        android:alphabeticShortcut="i"/>
+    <item
+        android:id="@+id/action_export_all"
+        android:icon="@drawable/ic_share"
+        android:title="@string/export_all_folders"
+        app:showAsAction="never"
+        android:orderInCategory="2"
+        android:numericShortcut="7"
+        android:alphabeticShortcut="e"/>
+    <item
+        android:id="@+id/action_info"
+        android:icon="@drawable/ic_info"
+        android:title="@string/about"
+        app:showAsAction="never"
+        android:orderInCategory="3"
+        android:numericShortcut="1"
+        android:alphabeticShortcut="h"/>
+</menu>

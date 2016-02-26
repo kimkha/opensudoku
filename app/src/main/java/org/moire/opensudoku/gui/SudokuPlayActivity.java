@@ -20,7 +20,6 @@
 
 package org.moire.opensudoku.gui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -32,12 +31,10 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -60,16 +57,6 @@ public class SudokuPlayActivity extends AppCompatActivity {
 
 	public static final String EXTRA_SUDOKU_ID = "sudoku_id";
 
-	public static final int MENU_ITEM_RESTART = Menu.FIRST;
-	public static final int MENU_ITEM_CLEAR_ALL_NOTES = Menu.FIRST + 1;
-	public static final int MENU_ITEM_FILL_IN_NOTES = Menu.FIRST + 2;
-	public static final int MENU_ITEM_UNDO = Menu.FIRST + 3;
-	public static final int MENU_ITEM_HELP = Menu.FIRST + 4;
-	public static final int MENU_ITEM_SETTINGS = Menu.FIRST + 5;
-
-	public static final int MENU_ITEM_SET_CHECKPOINT = Menu.FIRST + 6;
-	public static final int MENU_ITEM_UNDO_TO_CHECKPOINT = Menu.FIRST + 7;
-
 	private static final int DIALOG_RESTART = 1;
 	private static final int DIALOG_WELL_DONE = 2;
 	private static final int DIALOG_CLEAR_NOTES = 3;
@@ -79,7 +66,6 @@ public class SudokuPlayActivity extends AppCompatActivity {
 
 	private long mSudokuGameID;
 	private SudokuGame mSudokuGame;
-
 
 	private SudokuDatabase mDatabase;
 
@@ -270,35 +256,13 @@ public class SudokuPlayActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.play_sudoku, menu);
+
 		super.onCreateOptionsMenu(menu);
 
-		menu.add(0, MENU_ITEM_UNDO, 0, R.string.undo)
-				.setShortcut('1', 'u')
-				.setIcon(R.drawable.ic_undo);
-
-		menu.add(0, MENU_ITEM_RESTART, 5, R.string.restart)
-				.setShortcut('7', 'r')
-				.setIcon(R.drawable.ic_restore);
-
-		menu.add(0, MENU_ITEM_CLEAR_ALL_NOTES, 2, R.string.clear_all_notes)
-				.setShortcut('3', 'a')
-				.setIcon(R.drawable.ic_delete);
-
-		if (mFillInNotesEnabled) {
-			menu.add(0, MENU_ITEM_FILL_IN_NOTES, 1, R.string.fill_in_notes)
-					.setIcon(R.drawable.ic_edit_grey);
-		}
-
-        menu.add(0, MENU_ITEM_SET_CHECKPOINT, 3, R.string.set_checkpoint);
-        menu.add(0, MENU_ITEM_UNDO_TO_CHECKPOINT, 4, R.string.undo_to_checkpoint);
-
-		menu.add(0, MENU_ITEM_HELP, 7, R.string.help)
-				.setShortcut('0', 'h')
-				.setIcon(R.drawable.ic_help);
-
-		menu.add(0, MENU_ITEM_SETTINGS, 6, R.string.settings)
-				.setShortcut('9', 's')
-				.setIcon(R.drawable.ic_settings);
+        if (!mFillInNotesEnabled) {
+            menu.findItem(R.id.action_note).setVisible(false);
+        }
 
 		// Generate any additional actions that can be performed on the
 		// overall list.  In a normal install, there are no additional
@@ -317,19 +281,19 @@ public class SudokuPlayActivity extends AppCompatActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		if (mSudokuGame.getState() == SudokuGame.GAME_STATE_PLAYING) {
-			menu.findItem(MENU_ITEM_CLEAR_ALL_NOTES).setEnabled(true);
+			menu.findItem(R.id.action_clear_all).setEnabled(true);
 			if (mFillInNotesEnabled) {
-				menu.findItem(MENU_ITEM_FILL_IN_NOTES).setEnabled(true);
+				menu.findItem(R.id.action_note).setEnabled(true);
 			}
-			menu.findItem(MENU_ITEM_UNDO).setEnabled(mSudokuGame.hasSomethingToUndo());
-			menu.findItem(MENU_ITEM_UNDO_TO_CHECKPOINT).setEnabled(mSudokuGame.hasUndoCheckpoint());
+			menu.findItem(R.id.action_undo).setEnabled(mSudokuGame.hasSomethingToUndo());
+			menu.findItem(R.id.action_checkpoint_undo).setEnabled(mSudokuGame.hasUndoCheckpoint());
 		} else {
-			menu.findItem(MENU_ITEM_CLEAR_ALL_NOTES).setEnabled(false);
+			menu.findItem(R.id.action_clear_all).setEnabled(false);
 			if (mFillInNotesEnabled) {
-				menu.findItem(MENU_ITEM_FILL_IN_NOTES).setEnabled(false);
+				menu.findItem(R.id.action_note).setEnabled(false);
 			}
-			menu.findItem(MENU_ITEM_UNDO).setEnabled(false);
-			menu.findItem(MENU_ITEM_UNDO_TO_CHECKPOINT).setEnabled(false);
+			menu.findItem(R.id.action_undo).setEnabled(false);
+			menu.findItem(R.id.action_checkpoint_undo).setEnabled(false);
 		}
 
 		return true;
@@ -338,30 +302,30 @@ public class SudokuPlayActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case MENU_ITEM_RESTART:
+			case R.id.action_restart:
 				showDialog(DIALOG_RESTART);
 				return true;
-			case MENU_ITEM_CLEAR_ALL_NOTES:
+			case R.id.action_clear_all:
 				showDialog(DIALOG_CLEAR_NOTES);
 				return true;
-			case MENU_ITEM_FILL_IN_NOTES:
+			case R.id.action_note:
 				mSudokuGame.fillInNotes();
 				return true;
-			case MENU_ITEM_UNDO:
+			case R.id.action_undo:
 				mSudokuGame.undo();
 				return true;
-			case MENU_ITEM_SETTINGS:
+			case R.id.action_settings:
 				Intent i = new Intent();
 				i.setClass(this, GameSettingsActivity.class);
 				startActivityForResult(i, REQUEST_SETTINGS);
 				return true;
-			case MENU_ITEM_HELP:
+			case R.id.action_help:
 				mHintsQueue.showHint(R.string.help, R.string.help_text);
 				return true;
-			case MENU_ITEM_SET_CHECKPOINT:
+			case R.id.action_checkpoint:
 				mSudokuGame.setUndoCheckpoint();
 				return true;
-			case MENU_ITEM_UNDO_TO_CHECKPOINT:
+			case R.id.action_checkpoint_undo:
 				showDialog(DIALOG_UNDO_TO_CHECKPOINT);
 				return true;
 
@@ -394,7 +358,12 @@ public class SudokuPlayActivity extends AppCompatActivity {
 						.setIcon(R.drawable.ic_info)
 						.setTitle(R.string.well_done)
 						.setMessage(getString(R.string.congrats, mGameTimeFormatter.format(mSudokuGame.getTime())))
-						.setPositiveButton(android.R.string.ok, null)
+						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
 						.create();
 			case DIALOG_RESTART:
 				return new AlertDialog.Builder(this)
