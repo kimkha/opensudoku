@@ -59,6 +59,7 @@ public class SudokuBoardView extends View {
 	private Cell mTouchedCell;
 	// TODO: should I synchronize access to mSelectedCell?
 	private Cell mSelectedCell;
+
 	private boolean mReadonly = false;
 	private boolean mHighlightWrongVals = true;
 	private boolean mHighlightTouchedCell = true;
@@ -84,7 +85,8 @@ public class SudokuBoardView extends View {
 	private Paint mBackgroundColorTouched;
 	private Paint mBackgroundColorSelected;
 
-	private Paint mCellValueInvalidPaint;
+    private Paint mCellValueInvalidPaint;
+    private Paint mCellValueSamePaint;
 
 	public SudokuBoardView(Context context) {
 		this(context, null);
@@ -106,6 +108,7 @@ public class SudokuBoardView extends View {
 		mCellValuePaint = new Paint();
 		mCellValueReadonlyPaint = new Paint();
 		mCellValueInvalidPaint = new Paint();
+        mCellValueSamePaint = new Paint();
 		mCellNotePaint = new Paint();
 		mBackgroundColorSecondary = new Paint();
 		mBackgroundColorReadOnly = new Paint();
@@ -115,8 +118,10 @@ public class SudokuBoardView extends View {
 		mCellValuePaint.setAntiAlias(true);
 		mCellValueReadonlyPaint.setAntiAlias(true);
 		mCellValueInvalidPaint.setAntiAlias(true);
+        mCellValueSamePaint.setAntiAlias(true);
 		mCellNotePaint.setAntiAlias(true);
 		mCellValueInvalidPaint.setColor(Color.RED);
+        mCellValueSamePaint.setColor(0xFF008800);
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SudokuBoardView/*, defStyle, 0*/);
 
@@ -367,6 +372,7 @@ public class SudokuBoardView extends View {
 		mCellValuePaint.setTextSize(cellTextSize);
 		mCellValueReadonlyPaint.setTextSize(cellTextSize);
 		mCellValueInvalidPaint.setTextSize(cellTextSize);
+        mCellValueSamePaint.setTextSize(cellTextSize);
 		mCellNotePaint.setTextSize(mCellHeight / 3.0f);
 		// compute offsets in each cell to center the rendered number
 		mNumberLeft = (int) ((mCellWidth - mCellValuePaint.measureText("9")) / 2);
@@ -417,6 +423,10 @@ public class SudokuBoardView extends View {
 		// draw cells
 		int cellLeft, cellTop;
 		if (mCells != null) {
+            int selectedValue = 0;
+            if (mSelectedCell != null) {
+                selectedValue = mSelectedCell.getValue();
+            }
 
 			boolean hasBackgroundColorReadOnly = mBackgroundColorReadOnly.getColor() != NO_COLOR;
 
@@ -447,7 +457,10 @@ public class SudokuBoardView extends View {
 
 						if (mHighlightWrongVals && !cell.isValid()) {
 							cellValuePaint = mCellValueInvalidPaint;
-						}
+						} else if (selectedValue == value) {
+                            cellValuePaint = mCellValueSamePaint;
+                        }
+
 						canvas.drawText(Integer.toString(value),
 								cellLeft + mNumberLeft,
 								cellTop + mNumberTop - numberAscent,
