@@ -43,21 +43,26 @@ public class AndroidUtils {
 	public static void setThemeFromPreferences(Context context) {
 		SharedPreferences gameSettings = PreferenceManager.getDefaultSharedPreferences(context);
 		String theme = gameSettings.getString("theme", "default");
-		if (theme.equals("default")) {
-			context.setTheme(R.style.Theme_Default);
-		} else if (theme.equals("paperi")) {
-			context.setTheme(R.style.Theme_PaperI);
-		} else if (theme.equals("paperii")) {
-			context.setTheme(R.style.Theme_PaperII);
-		} else if (theme.equals("light")) {
-			context.setTheme(R.style.Theme_Light);
-        } else if (theme.equals("paperlighti")) {
-            context.setTheme(R.style.Theme_PaperLightI);
-        } else if (theme.equals("paperlightii")) {
-            context.setTheme(R.style.Theme_PaperLightII);
-		} else {
-			context.setTheme(R.style.Theme_Default);
-		}
+        switch (theme) {
+            case "paperi":
+                context.setTheme(R.style.Theme_PaperI);
+                break;
+            case "paperii":
+                context.setTheme(R.style.Theme_PaperII);
+                break;
+            case "light":
+                context.setTheme(R.style.Theme_Light);
+                break;
+            case "paperlighti":
+                context.setTheme(R.style.Theme_PaperLightI);
+                break;
+            case "paperlightii":
+                context.setTheme(R.style.Theme_PaperLightII);
+                break;
+            default:
+                context.setTheme(R.style.Theme_Default);
+                break;
+        }
 	}
 
 	/**

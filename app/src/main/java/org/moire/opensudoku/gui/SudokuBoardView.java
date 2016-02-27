@@ -121,7 +121,6 @@ public class SudokuBoardView extends View {
         mCellValueSamePaint.setAntiAlias(true);
 		mCellNotePaint.setAntiAlias(true);
 		mCellValueInvalidPaint.setColor(Color.RED);
-        mCellValueSamePaint.setColor(0xFF008800);
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SudokuBoardView/*, defStyle, 0*/);
 
@@ -130,10 +129,11 @@ public class SudokuBoardView extends View {
 		setTextColor(a.getColor(R.styleable.SudokuBoardView_textColor, Color.BLACK));
 		setTextColorReadOnly(a.getColor(R.styleable.SudokuBoardView_textColorReadOnly, Color.BLACK));
 		setTextColorNote(a.getColor(R.styleable.SudokuBoardView_textColorNote, Color.BLACK));
+        setTextColorSameNumber(a.getColor(R.styleable.SudokuBoardView_textColorSameNumber, Color.BLACK));
 		setBackgroundColor(a.getColor(R.styleable.SudokuBoardView_backgroundColor, Color.WHITE));
 		setBackgroundColorSecondary(a.getColor(R.styleable.SudokuBoardView_backgroundColorSecondary, NO_COLOR));
 		setBackgroundColorReadOnly(a.getColor(R.styleable.SudokuBoardView_backgroundColorReadOnly, NO_COLOR));
-		setBackgroundColorTouched(a.getColor(R.styleable.SudokuBoardView_backgroundColorTouched, Color.rgb(50, 50, 255)));
+		setBackgroundColorTouched(a.getColor(R.styleable.SudokuBoardView_backgroundColorTouched, 0xFF3232FF));
 		setBackgroundColorSelected(a.getColor(R.styleable.SudokuBoardView_backgroundColorSelected, Color.YELLOW));
 
 		a.recycle();
@@ -178,6 +178,14 @@ public class SudokuBoardView extends View {
 	public void setTextColorNote(int color) {
 		mCellNotePaint.setColor(color);
 	}
+
+    public int getTextColorSameNumber() {
+        return mCellValueSamePaint.getColor();
+    }
+
+    public void setTextColorSameNumber(int color) {
+        mCellValueSamePaint.setColor(color);
+    }
 
 	public int getBackgroundColorSecondary() {
 		return mBackgroundColorSecondary.getColor();

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<style name="Theme" parent="Theme.AppCompat" />
-
 	<style name="MyTheme" parent="Theme.AppCompat">
 		<item name="windowNoTitle">true</item>
 		<item name="windowActionBar">false</item>
@@ -14,6 +12,7 @@
 		<item name="textColor">@android:color/white</item>
 		<item name="textColorReadOnly">@android:color/white</item>
 		<item name="textColorNote">#f5f5f5</item>
+        <item name="textColorSameNumber">#81c784</item>
 		<item name="backgroundColor">#424242</item>
 		<item name="backgroundColorReadOnly">#616161</item>
 		<item name="backgroundColorTouched">#009688</item>
@@ -26,6 +25,7 @@
 		<item name="textColor">@android:color/white</item>
 		<item name="textColorReadOnly">@android:color/white</item>
 		<item name="textColorNote">#f5f5f5</item>
+        <item name="textColorSameNumber">#81c784</item>
 		<item name="backgroundColor">#424242</item>
 		<item name="backgroundColorTouched">#009688</item>
 		<item name="backgroundColorSelected">#b2dfdb</item>
@@ -37,6 +37,7 @@
 		<item name="textColor">@android:color/white</item>
 		<item name="textColorReadOnly">@android:color/white</item>
 		<item name="textColorNote">#f5f5f5</item>
+        <item name="textColorSameNumber">#81c784</item>
 		<item name="backgroundColor">#424242</item>
 		<item name="backgroundColorSecondary">#616161</item>
 		<item name="backgroundColorTouched">#009688</item>
@@ -49,6 +50,7 @@
 		<item name="textColor">@android:color/black</item>
 		<item name="textColorReadOnly">@android:color/black</item>
 		<item name="textColorNote">@android:color/black</item>
+        <item name="textColorSameNumber">#008800</item>
 		<item name="backgroundColor">@android:color/white</item>
 		<item name="backgroundColorReadOnly">#cccccc</item>
 		<item name="backgroundColorTouched">#009688</item>
@@ -61,6 +63,7 @@
 		<item name="textColor">#555555</item>
 		<item name="textColorReadOnly">@android:color/black</item>
 		<item name="textColorNote">#555555</item>
+        <item name="textColorSameNumber">#008800</item>
 		<item name="backgroundColor">@android:color/white</item>
 		<item name="backgroundColorTouched">#009688</item>
 		<item name="backgroundColorSelected">#b2dfdb</item>
@@ -72,6 +75,7 @@
 		<item name="textColor">#555555</item>
 		<item name="textColorReadOnly">@android:color/black</item>
 		<item name="textColorNote">#555555</item>
+        <item name="textColorSameNumber">#008800</item>
 		<item name="backgroundColor">#dddddd</item>
 		<item name="backgroundColorSecondary">@android:color/white</item>
 		<item name="backgroundColorTouched">#009688</item>
