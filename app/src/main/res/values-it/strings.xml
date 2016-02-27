@@ -2,8 +2,6 @@
 <resources>
 	<string name="edit_sudoku">Modifica sudoku</string>
 
-	<string name="puzzle_folders">Cartelle rompicapo OpenSudoku</string>
-
 	<string name="version">Versione: %s</string>
 	<string name="send_me_bugs">Se trovi un problema che vuio risolvere o qualsiasi suggerimento, non esistare a
 		contattarci tramite email oppure ad usare il sistema di rintracciabilità degli errori nel sito del progetto.

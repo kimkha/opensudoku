@@ -2,8 +2,6 @@
 <resources>
 	<string name="edit_sudoku">Sudoku-Rätsel bearbeiten</string>
 
-	<string name="puzzle_folders">OpenSudoku Rätsel-Ordner</string>
-
 	<string name="version">Version: %s</string>
 	<string name="send_me_bugs">Falls Sie einen Fehler finden, den Sie gerne behoben haben möchten oder falls Sie
 		Verbesserungsvorschläge haben, zögern Sie nicht uns per E-Mail zu kontaktieren oder nutzen Sie den Issue-Tracker

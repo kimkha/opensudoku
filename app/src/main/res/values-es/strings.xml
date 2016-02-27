@@ -2,8 +2,6 @@
 <resources>
 	<string name="edit_sudoku">Editar sudoku</string>
 
-	<string name="puzzle_folders">Carpetas de los puzzles de Open Sudoku</string>
-
 	<string name="version">Versión %s</string>
 	<string name="send_me_bugs">Si encuentras algún error y quieres solucionarlo, no dudes en
         contactarme vía correo electónico o en usar el resgistro de incidencias en la página

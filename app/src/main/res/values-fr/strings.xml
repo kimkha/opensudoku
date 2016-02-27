@@ -2,8 +2,6 @@
 <resources>
 	<string name="edit_sudoku">Edit sudoku</string>
 
-	<string name="puzzle_folders">OpenSudoku dossiers puzzle</string>
-
 	<string name="version">Version: %s</string>
 
 	<string name="send_me_bugs">Si vous avez un bug ou une suggestion à soumettre, n\'hésitez pas à me contacter par
