@@ -1,4 +1,4 @@
-# I fork to new app which fix some UI bug: https://play.google.com/store/apps/details?id=com.nkimkha.sudoku
+# I fork to new app which fix some UI bug: [Sudoku Free NEW](https://play.google.com/store/apps/details?id=com.nkimkha.sudoku)
 
 # Open Sudoku
 
