@@ -8,8 +8,9 @@ android {
         applicationId "com.nkimkha.sudoku"
         minSdkVersion 9
         targetSdkVersion 23
+        vectorDrawables.useSupportLibrary = true
         versionCode getCustomVersion()
-        versionName "0.1"
+        versionName "0.1.1"
     }
     buildTypes {
         release {
@@ -37,6 +38,6 @@ def getCustomVersion() {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:design:23.2.0'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
 }
