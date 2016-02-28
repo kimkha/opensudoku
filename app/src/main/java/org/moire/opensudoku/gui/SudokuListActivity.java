@@ -245,7 +245,7 @@ public class SudokuListActivity extends AppCompatActivity implements AdapterView
 		switch (id) {
 			case DIALOG_DELETE_PUZZLE:
 				return new AlertDialog.Builder(this).setIcon(
-						R.drawable.ic_delete).setTitle("Puzzle").setMessage(
+						R.drawable.ic_delete_grey_24dp).setTitle("Puzzle").setMessage(
 						R.string.delete_puzzle_confirm)
 						.setPositiveButton(android.R.string.yes,
 								new DialogInterface.OnClickListener() {
@@ -262,7 +262,7 @@ public class SudokuListActivity extends AppCompatActivity implements AdapterView
 						null);
 				mEditNoteInput = (TextView) noteView.findViewById(R.id.note);
 				return new AlertDialog.Builder(this).setIcon(
-						R.drawable.ic_add).setTitle(R.string.edit_note)
+						R.drawable.ic_add_box_grey_24dp).setTitle(R.string.edit_note)
 						.setView(noteView).setPositiveButton(R.string.save,
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
@@ -276,7 +276,7 @@ public class SudokuListActivity extends AppCompatActivity implements AdapterView
 								}).setNegativeButton(android.R.string.cancel, null).create();
 			case DIALOG_RESET_PUZZLE:
 				return new AlertDialog.Builder(this).setIcon(
-						R.drawable.ic_restore).setTitle("Puzzle")
+						R.drawable.ic_restore_grey_24dp).setTitle("Puzzle")
 						.setMessage(R.string.reset_puzzle_confirm)
 						.setPositiveButton(android.R.string.yes,
 								new DialogInterface.OnClickListener() {
@@ -292,7 +292,7 @@ public class SudokuListActivity extends AppCompatActivity implements AdapterView
 								}).setNegativeButton(android.R.string.no, null).create();
 			case DIALOG_FILTER:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_view)
+						.setIcon(R.drawable.ic_pageview_grey_24dp)
 						.setTitle(R.string.filter_by_gamestate)
 						.setMultiChoiceItems(
 								R.array.game_states,

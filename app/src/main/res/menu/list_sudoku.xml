@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_open_folder"
-        android:icon="@drawable/ic_sort"
+        android:icon="@drawable/ic_sort_grey_24dp"
         android:title="@string/folders"
         app:showAsAction="never"
         android:orderInCategory="0"
@@ -12,7 +12,7 @@
         android:alphabeticShortcut="f"/>
     <item
         android:id="@+id/action_filter"
-        android:icon="@drawable/ic_view"
+        android:icon="@drawable/ic_pageview_grey_24dp"
         android:title="@string/filter"
         app:showAsAction="never"
         android:orderInCategory="1"
@@ -20,7 +20,7 @@
         android:alphabeticShortcut="l"/>
     <item
         android:id="@+id/action_insert"
-        android:icon="@drawable/ic_add"
+        android:icon="@drawable/ic_add_box_grey_24dp"
         android:title="@string/add_sudoku"
         app:showAsAction="never"
         android:orderInCategory="2"

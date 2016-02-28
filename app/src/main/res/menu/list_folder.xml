@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_add_folder"
-        android:icon="@drawable/ic_add"
+        android:icon="@drawable/ic_add_box_grey_24dp"
         android:title="@string/add_folder"
         app:showAsAction="never"
         android:orderInCategory="0"
@@ -12,7 +12,7 @@
         android:alphabeticShortcut="a"/>
     <item
         android:id="@+id/action_import"
-        android:icon="@drawable/ic_cloud_upload"
+        android:icon="@drawable/ic_cloud_upload_grey_24dp"
         android:title="@string/import_file"
         app:showAsAction="never"
         android:orderInCategory="1"
@@ -20,7 +20,7 @@
         android:alphabeticShortcut="i"/>
     <item
         android:id="@+id/action_export_all"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/ic_share_grey_24dp"
         android:title="@string/export_all_folders"
         app:showAsAction="never"
         android:orderInCategory="2"
@@ -28,7 +28,7 @@
         android:alphabeticShortcut="e"/>
     <item
         android:id="@+id/action_info"
-        android:icon="@drawable/ic_info"
+        android:icon="@drawable/ic_info_grey_24dp"
         android:title="@string/about"
         app:showAsAction="never"
         android:orderInCategory="3"

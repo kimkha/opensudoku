@@ -66,7 +66,7 @@ public class HintsQueue {
 		mOneTimeHintsEnabled = gameSettings.getBoolean("show_hints", true);
 
 		mHintDialog = new AlertDialog.Builder(context)
-				.setIcon(R.drawable.ic_info)
+				.setIcon(R.drawable.ic_info_grey_24dp)
 				.setTitle(R.string.hint)
 				.setMessage("")
 				.setPositiveButton(R.string.close, mHintClosed).create();

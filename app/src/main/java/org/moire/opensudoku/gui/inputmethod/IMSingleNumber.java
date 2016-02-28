@@ -186,10 +186,10 @@ public class IMSingleNumber extends InputMethod {
 	private void update() {
 		switch (mEditMode) {
 			case MODE_EDIT_NOTE:
-				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_white);
+				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_white_24dp);
 				break;
 			case MODE_EDIT_VALUE:
-				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_grey);
+				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_grey_24dp);
 				break;
 		}
 

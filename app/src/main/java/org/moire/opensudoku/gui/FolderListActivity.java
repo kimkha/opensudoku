@@ -270,7 +270,7 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 				View addFolderView = factory.inflate(R.layout.folder_name, null);
 				mAddFolderNameInput = (TextView) addFolderView.findViewById(R.id.name);
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_add)
+						.setIcon(R.drawable.ic_add_box_grey_24dp)
 						.setTitle(R.string.add_folder)
 						.setView(addFolderView)
 						.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
@@ -286,7 +286,7 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 				mRenameFolderNameInput = (TextView) renameFolderView.findViewById(R.id.name);
 
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_edit_grey)
+						.setIcon(R.drawable.ic_edit_grey_24dp)
 						.setTitle(R.string.rename_folder_title)
 						.setView(renameFolderView)
 						.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
@@ -299,7 +299,7 @@ public class FolderListActivity extends AppCompatActivity implements AdapterView
 						.create();
 			case DIALOG_DELETE_FOLDER:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_delete)
+						.setIcon(R.drawable.ic_delete_grey_24dp)
 						.setTitle(R.string.delete_folder_title)
 						.setMessage(R.string.delete_folder_confirm)
 						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

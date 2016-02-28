@@ -203,10 +203,10 @@ public class IMNumpad extends InputMethod {
 	private void update() {
 		switch (mEditMode) {
 			case MODE_EDIT_NOTE:
-				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_white);
+				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_white_24dp);
 				break;
 			case MODE_EDIT_VALUE:
-				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_grey);
+				mSwitchNumNoteButton.setImageResource(R.drawable.ic_edit_grey_24dp);
 				break;
 		}
 
@@ -220,7 +220,9 @@ public class IMNumpad extends InputMethod {
 				Button b = mNumberButtons.get(entry.getKey());
 				if (highlightValue) {
                     b.getBackground().setColorFilter(0xFF1B5E20, PorterDuff.Mode.MULTIPLY);
+					b.setTextAppearance(mContext, android.R.style.TextAppearance_Large);
 				} else {
+					b.setTextAppearance(mContext, android.R.style.TextAppearance_Widget_Button);
                     b.getBackground().setColorFilter(null);
 				}
 			}

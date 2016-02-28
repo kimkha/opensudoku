@@ -355,7 +355,7 @@ public class SudokuPlayActivity extends AppCompatActivity {
 		switch (id) {
 			case DIALOG_WELL_DONE:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_info)
+						.setIcon(R.drawable.ic_info_grey_24dp)
 						.setTitle(R.string.well_done)
 						.setMessage(getString(R.string.congrats, mGameTimeFormatter.format(mSudokuGame.getTime())))
 						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -367,7 +367,7 @@ public class SudokuPlayActivity extends AppCompatActivity {
 						.create();
 			case DIALOG_RESTART:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_restore)
+						.setIcon(R.drawable.ic_restore_grey_24dp)
 						.setTitle(R.string.app_name)
 						.setMessage(R.string.restart_confirm)
 						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -385,7 +385,7 @@ public class SudokuPlayActivity extends AppCompatActivity {
 						.create();
 			case DIALOG_CLEAR_NOTES:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_delete)
+						.setIcon(R.drawable.ic_delete_grey_24dp)
 						.setTitle(R.string.app_name)
 						.setMessage(R.string.clear_all_notes_confirm)
 						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -397,7 +397,7 @@ public class SudokuPlayActivity extends AppCompatActivity {
 						.create();
 			case DIALOG_UNDO_TO_CHECKPOINT:
 				return new AlertDialog.Builder(this)
-						.setIcon(R.drawable.ic_undo)
+						.setIcon(R.drawable.ic_undo_grey_24dp)
 						.setTitle(R.string.app_name)
 						.setMessage(R.string.undo_to_checkpoint_confirm)
 						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

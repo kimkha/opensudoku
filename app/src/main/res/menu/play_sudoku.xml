@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_undo"
-        android:icon="@drawable/ic_undo"
+        android:icon="@drawable/ic_undo_grey_24dp"
         android:title="@string/undo"
         app:showAsAction="ifRoom"
         android:orderInCategory="0"
@@ -11,7 +11,7 @@
         android:alphabeticShortcut="u"/>
     <item
         android:id="@+id/action_restart"
-        android:icon="@drawable/ic_restore"
+        android:icon="@drawable/ic_restore_grey_24dp"
         android:title="@string/restart"
         app:showAsAction="never"
         android:orderInCategory="5"
@@ -19,7 +19,7 @@
         android:alphabeticShortcut="r"/>
     <item
         android:id="@+id/action_clear_all"
-        android:icon="@drawable/ic_delete"
+        android:icon="@drawable/ic_delete_grey_24dp"
         android:title="@string/clear_all_notes"
         app:showAsAction="never"
         android:orderInCategory="2"
@@ -27,7 +27,7 @@
         android:alphabeticShortcut="a"/>
     <item
         android:id="@+id/action_note"
-        android:icon="@drawable/ic_edit_grey"
+        android:icon="@drawable/ic_edit_grey_24dp"
         android:title="@string/fill_in_notes"
         app:showAsAction="never"
         android:orderInCategory="1"/>
@@ -43,7 +43,7 @@
         android:orderInCategory="4"/>
     <item
         android:id="@+id/action_help"
-        android:icon="@drawable/ic_help"
+        android:icon="@drawable/ic_help_grey_24dp"
         android:title="@string/help"
         app:showAsAction="never"
         android:orderInCategory="7"
@@ -51,7 +51,7 @@
         android:alphabeticShortcut="h"/>
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_settings_applications_grey_24dp"
         android:title="@string/settings"
         app:showAsAction="never"
         android:orderInCategory="6"
